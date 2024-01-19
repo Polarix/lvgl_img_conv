@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="lvgl_img_lib" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="./build/bin/lvgl_img_convd" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="./build/output/debug" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="./build/bin/lvgl_img_conv" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="./build/output/release" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=gnu++11" />
+			<Add option="-DSTB_TRUETYPE_IMPLEMENTATION" />
+			<Add option="-DSTB_IMAGE_WRITE_IMPLEMENTATION" />
+			<Add option="-DSTB_IMAGE_IMPLEMENTATION" />
+			<Add directory="$(#stb)" />
+			<Add directory="./inc" />
+			<Add directory="$(#lvgl)" />
+		</Compiler>
+		<Unit filename="inc/binary_generator.h" />
+		<Unit filename="inc/code_generator.h" />
+		<Unit filename="inc/generator_base.h" />
+		<Unit filename="inc/image_binary.h" />
+		<Unit filename="inc/image_raw_data.h" />
+		<Unit filename="inc/log.h" />
+		<Unit filename="inc/path.h" />
+		<Unit filename="src/binary_generator.cpp" />
+		<Unit filename="src/code_generator.cpp" />
+		<Unit filename="src/generator_base.cpp" />
+		<Unit filename="src/image_binary.cpp" />
+		<Unit filename="src/image_raw_data.cpp" />
+		<Unit filename="src/path.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

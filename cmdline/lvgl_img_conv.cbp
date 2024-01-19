@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="lvgl_img_conv" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="output/bin/debug/lvgl_img_conv" prefix_auto="1" extension_auto="1" />
+				<Option object_output="output/obj/debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="output/bin/release/lvgl_img_conv" prefix_auto="1" extension_auto="1" />
+				<Option object_output="output/obj/release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=gnu++11" />
+			<Add option="-DSTB_TRUETYPE_IMPLEMENTATION" />
+			<Add option="-DSTB_IMAGE_WRITE_IMPLEMENTATION" />
+			<Add option="-DSTB_IMAGE_IMPLEMENTATION" />
+			<Add directory="$(#stb)" />
+			<Add directory="../lvgl_img_conv_lib/inc" />
+			<Add directory="$(#lvgl)" />
+		</Compiler>
+		<Unit filename="../lvgl_img_conv_lib/inc/binary_generator.h" />
+		<Unit filename="../lvgl_img_conv_lib/inc/code_generator.h" />
+		<Unit filename="../lvgl_img_conv_lib/inc/generator_base.h" />
+		<Unit filename="../lvgl_img_conv_lib/inc/image_binary.h" />
+		<Unit filename="../lvgl_img_conv_lib/inc/image_raw_data.h" />
+		<Unit filename="../lvgl_img_conv_lib/inc/log.h" />
+		<Unit filename="../lvgl_img_conv_lib/inc/path.h" />
+		<Unit filename="../lvgl_img_conv_lib/src/binary_generator.cpp" />
+		<Unit filename="../lvgl_img_conv_lib/src/code_generator.cpp" />
+		<Unit filename="../lvgl_img_conv_lib/src/generator_base.cpp" />
+		<Unit filename="../lvgl_img_conv_lib/src/image_binary.cpp" />
+		<Unit filename="../lvgl_img_conv_lib/src/image_raw_data.cpp" />
+		<Unit filename="../lvgl_img_conv_lib/src/path.cpp" />
+		<Unit filename="app/main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

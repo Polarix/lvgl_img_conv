@@ -7,7 +7,7 @@
 * lvgl_img_conv_lib: 这个文件夹中的内容可以编译出一个C++库，提供图片资源制作功能。
 * cmdline 一个使用lvgl_img_conv_lib创建的一个简易范例。这个例子运行于控制台模式下，可以通过简单的修改使用。
 
-参考以上内容，可以快速的构建一个离弦的LVGL图片转换工具。
+参考以上内容，可以快速的构建一个离线的LVGL图片转换工具。
 
 ### 功能
 截至目前，lvgl_img_conv_lib可以创建C源码形式的图片资源以及bin文件形式的资源文件，支持输出的图像色彩格式如下：
@@ -17,8 +17,8 @@
 
 ### 依赖
 lvgl_img_conv_lib的开发依赖了以下开源软件：
-* stb image：使用了stb的image组件用于支持多种图片文件的输入，如bmp、jpg、png等。
-* lvgl：因为输出内容是面向LVGL的，所以需要参考LVGL的数据结构定义。
+* [stb image](https://github.com/nothings/stb)：使用了stb的image组件用于支持多种图片文件的输入，如bmp、jpg、png等。
+* [lvgl](https://github.com/lvgl/lvgl)：因为输出内容是面向LVGL的，所以需要参考LVGL的数据结构定义。
 
 ### 计划
 lvgl_img_conv_lib正在计划开发和补全以下内容。

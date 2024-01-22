@@ -31,7 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-std=gnu++11" />
-			<Add option="-DSTB_TRUETYPE_IMPLEMENTATION" />
 			<Add option="-DSTB_IMAGE_WRITE_IMPLEMENTATION" />
 			<Add option="-DSTB_IMAGE_IMPLEMENTATION" />
 			<Add directory="$(#stb)" />

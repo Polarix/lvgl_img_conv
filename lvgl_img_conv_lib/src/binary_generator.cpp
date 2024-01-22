@@ -48,8 +48,8 @@ bool binary_generator::generate_data(const image_binary& binary_data)
         int pixel_row_idx = 0;
         while(pixel_row_idx < binary_data.height())
         {
-            int byte_idx = pixel_row_idx * binary_data.width() * binary_data.pixel_data_width();
-            output_img_bmp_line(binary_data.data(byte_idx), binary_data.width() * binary_data.pixel_data_width());
+            int byte_idx = pixel_row_idx * binary_data.line_width();
+            output_img_bmp_line(binary_data.data(byte_idx), binary_data.line_width());
             ++pixel_row_idx;
         }
         result = true;

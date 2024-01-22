@@ -31,7 +31,7 @@ private:
     uint8_t*            m_data;
     int                 m_width;
     int                 m_height;
-    int                 m_byte_per_pixel;
+    int                 m_line_width;
     int                 m_data_size;
     color_format_t      m_format;
 
@@ -42,11 +42,11 @@ public:
     virtual             ~image_binary(void);
     void                release(void);
     bool                create(int width, int height, color_format_t color_format, bool with_alpha);
-    bool                create(int width, int height, int pixel_data_width, int offset = 0);
+    bool                create(int width, int height, int line_width, int offset = 0);
     std::string         line_to_string(int line, bool change_line = false) const;
     int                 width(void) const;
     int                 height(void) const;
-    int                 pixel_data_width(void) const;
+    int                 line_width(void) const;
     uint32_t            size(void) const;
     uint8_t* const      data(int offset = 0) const;
     color_format_t      format(void) const;

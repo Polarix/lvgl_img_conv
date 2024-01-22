@@ -33,3 +33,4 @@
 
 # Codeblocks recorder
 *.depend
+*.layout

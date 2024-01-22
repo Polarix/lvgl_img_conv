@@ -16,7 +16,7 @@ image_binary::image_binary(void)
  , m_height(0)
  , m_line_width(0)
  , m_data_size(0)
- , m_format(img_bin_color_format_unknown)
+ , m_format(img_bin_format_unknown)
 {
 
 }
@@ -56,22 +56,47 @@ bool image_binary::create(int width, int height, color_format_t color_format, bo
 {
     bool result = false;
     int line_width;
+    int additional = 0;
     switch(color_format)
     {
-        case img_bin_color_format_rgb332:
+        case img_bin_format_rgb332:
         {
             line_width = (1 + (with_alpha?1:0)) * width;
             break;
         }
-        case img_bin_color_format_rgb565:
-        case img_bin_color_format_rgb565_swap:
+        case img_bin_format_rgb565:
+        case img_bin_format_rgb565_swap:
         {
             line_width = (2 + (with_alpha?1:0)) * width;
             break;
         }
-        case img_bin_color_format_argb8888:
+        case img_bin_format_argb8888:
         {
             line_width = 4 * width;
+            break;
+        }
+        case img_bin_format_indexed_1bit:
+        {
+            line_width = (width - 1) / 8 + 1;
+            additional = (0x01 << 1);
+            break;
+        }
+        case img_bin_format_indexed_2bit:
+        {
+            line_width = (width - 1) / 4 + 1;
+            additional = (0x01 << 2);
+            break;
+        }
+        case img_bin_format_indexed_4bit:
+        {
+            line_width = (width - 1) / 2 + 1;
+            additional = (0x01 << 4);
+            break;
+        }
+        case img_bin_format_indexed_8bit:
+        {
+            line_width = width;
+            additional = (0x01 << 8);
             break;
         }
         default:
@@ -82,13 +107,13 @@ bool image_binary::create(int width, int height, color_format_t color_format, bo
 
     if(width && height && line_width)
     {
-        result = create(width, height, line_width);
+        result = create(width, height, line_width, additional);
         m_format = color_format;
     }
     return result;
 }
 
-bool image_binary::create(int width, int height, int line_width, int offset)
+bool image_binary::create(int width, int height, int line_width, int addition)
 {
     bool result = false;
     if(width && height && line_width)
@@ -96,10 +121,11 @@ bool image_binary::create(int width, int height, int line_width, int offset)
         m_width = width;
         m_height = height;
         m_line_width = line_width;
-        m_data_size = line_width * m_height + offset;
+        m_data_size = line_width * m_height + addition;
         m_data = new uint8_t[m_data_size];
         if(m_data)
         {
+            ::memset(m_data, 0x00, m_data_size);
             result = true;
         }
     }

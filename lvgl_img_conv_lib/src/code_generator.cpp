@@ -113,22 +113,22 @@ bool code_generator::generate_data(const image_binary& binary_data)
     {
         switch(binary_data.format())
         {
-            case img_bin_color_format_rgb332:
+            case img_bin_format_rgb332:
             {
                 m_source_file << s_image_data_8bit_map_start_marco;
                 break;
             }
-            case img_bin_color_format_rgb565:
+            case img_bin_format_rgb565:
             {
                 m_source_file << s_image_data_16bit_map_start_marco;
                  break;
            }
-            case img_bin_color_format_rgb565_swap:
+            case img_bin_format_rgb565_swap:
             {
                 m_source_file << s_image_data_16bit_map_swap_start_marco;
                 break;
             }
-            case img_bin_color_format_argb8888:
+            case img_bin_format_argb8888:
             {
                 m_source_file << s_image_data_32bit_map_start_marco;
                 break;
@@ -152,22 +152,22 @@ bool code_generator::generate_data(const image_binary& binary_data)
 
         switch(binary_data.format())
         {
-            case img_bin_color_format_rgb332:
+            case img_bin_format_rgb332:
             {
                 m_source_file << s_image_data_8bit_map_end_marco;
                 break;
             }
-            case img_bin_color_format_rgb565:
+            case img_bin_format_rgb565:
             {
                 m_source_file << s_image_data_16bit_map_end_marco;
                 break;
             }
-            case img_bin_color_format_rgb565_swap:
+            case img_bin_format_rgb565_swap:
             {
                 m_source_file << s_image_data_16bit_map_swap_end_marco;
                 break;
             }
-            case img_bin_color_format_argb8888:
+            case img_bin_format_argb8888:
             {
                 m_source_file << s_image_data_32bit_map_end_marco;
                 break;

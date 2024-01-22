@@ -11,15 +11,15 @@
 //===========================================================//
 typedef enum _e_color_format_
 {
-    img_bin_color_format_unknown = 0,
-    img_bin_color_format_rgb332,
-    img_bin_color_format_rgb565,
-    img_bin_color_format_rgb565_swap,
-    img_bin_color_format_argb8888,
-    img_bin_color_indexed_1bit,
-    img_bin_color_indexed_2bit,
-    img_bin_color_indexed_4bit,
-    img_bin_color_indexed_8bit,
+    img_bin_format_unknown = 0,
+    img_bin_format_rgb332,
+    img_bin_format_rgb565,
+    img_bin_format_rgb565_swap,
+    img_bin_format_argb8888,
+    img_bin_format_indexed_1bit,
+    img_bin_format_indexed_2bit,
+    img_bin_format_indexed_4bit,
+    img_bin_format_indexed_8bit,
 }color_format_t;
 
 //===========================================================//
@@ -42,7 +42,7 @@ public:
     virtual             ~image_binary(void);
     void                release(void);
     bool                create(int width, int height, color_format_t color_format, bool with_alpha);
-    bool                create(int width, int height, int line_width, int offset = 0);
+    bool                create(int width, int height, int line_width, int addition = 0);
     std::string         line_to_string(int line, bool change_line = false) const;
     int                 width(void) const;
     int                 height(void) const;

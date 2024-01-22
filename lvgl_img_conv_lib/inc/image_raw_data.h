@@ -54,20 +54,18 @@ typedef union
     } ch;
 }argb32_px_t;
 
-typedef enum _e_argb_idx_
+typedef union _st_img_raw_px_
 {
-    argb_idx_r = 0,
-    argb_idx_g,
-    argb_idx_b,
-    argb_idx_a,
-}argb_idx_t;
-
-typedef enum _e_img_data_type_
-{
-    img_data_type_unknown = 0,
-    img_data_type_true_color,
-    img_data_type_gray,
-}img_data_type;
+    uint32_t full;
+    struct
+    {
+        uint8_t     red;
+        uint8_t     green;
+        uint8_t     blue;
+        uint8_t     alpha;
+    }ch;
+    uint8_t         bytes[4];
+}img_raw_px_data;
 
 //===========================================================//
 //= Class declare.                                          =//
@@ -77,7 +75,6 @@ class image_raw_data
 private:
     uint8_t*            m_data;
     int                 m_data_size;
-    img_data_type       m_type;
     int                 m_width;
     int                 m_height;
 
@@ -90,23 +87,12 @@ public:
     explicit            image_raw_data(image_raw_data&& right);
     virtual             ~image_raw_data(void);
     bool                load(const std::string& image_file_path);
-    bool                create_gray(const image_raw_data& sourcec);
     bool                is_ok(void) const;
-    bool                save(const std::string& save_path);
     int                 get_width(void) const;
     int                 get_height(void) const;
-    img_data_type       get_type(void) const;
-    uint32_t            as_argb32(int x, int y);
-    uint16_t            as_rgb565(int x, int y, bool swap = false);
-    uint8_t             as_rgb332(int x, int y);
-    uint8_t             red(int x, int y);
-    uint8_t             green(int x, int y);
-    uint8_t             blue(int x, int y);
-    uint8_t             alpha(int x, int y);
     bool                create_8b_binary(image_binary& bin, bool with_alpha) const;
     bool                create_16b_binary(image_binary& bin, bool with_alpha, bool swap) const;
     bool                create_32b_binary(image_binary& bin, bool with_alpha) const;
-    bool                create_index_bunary(image_binary& bin, int index_bits) const;
 };
 
 #endif // _INCLUDE_CLASS_IMAGE_RAW_DATA_H_

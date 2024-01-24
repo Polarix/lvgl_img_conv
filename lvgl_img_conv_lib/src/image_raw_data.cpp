@@ -221,3 +221,105 @@ bool image_raw_data::create_32b_binary(image_binary& bin, bool with_alpha) const
 
     return result;
 }
+
+bool image_raw_data::create_1bit_alpha_binary(image_binary& bin) const
+{
+    bool result = false;
+    uint8_t divisor = 0xFF / (0x01 << 1) + 1;
+    /* Release existed data. */
+    bin.release();
+    /* Allocate new memory, force append alpha channel. */
+    if(bin.create(m_width, m_height, img_bin_format_alpha_1bit, true))
+    {
+        const img_raw_px_data* raw_data = reinterpret_cast<const img_raw_px_data*>(m_data);
+        for(int row_idx=0; row_idx<m_height; ++row_idx)
+        {
+            /* Src line head. */
+            const img_raw_px_data* raw_line_data = raw_data + (m_width * row_idx);
+            /* Dest line head. */
+            uint8_t* img_bin_data = bin.data() + (bin.line_width() * row_idx);
+            for(int col_idx=0; col_idx<m_width; ++col_idx)
+            {
+                if(raw_line_data[col_idx].ch.alpha / divisor)
+                {
+                    img_bin_data[col_idx / 8] |= (0x80 >> (col_idx % 8));
+                }
+            }
+        }
+    }
+    return result;
+}
+
+bool image_raw_data::create_2bit_alpha_binary(image_binary& bin) const
+{
+    bool result = false;
+    uint8_t divisor = 0xFF / (0x01 << 2) + 1;
+    /* Release existed data. */
+    bin.release();
+    /* Allocate new memory, force append alpha channel. */
+    if(bin.create(m_width, m_height, img_bin_format_alpha_2bit, true))
+    {
+        const img_raw_px_data* raw_data = reinterpret_cast<const img_raw_px_data*>(m_data);
+        for(int row_idx=0; row_idx<m_height; ++row_idx)
+        {
+            /* Src line head. */
+            const img_raw_px_data* raw_line_data = raw_data + (m_width * row_idx);
+            /* Dest line head. */
+            uint8_t* img_bin_data = bin.data() + (bin.line_width() * row_idx);
+            for(int col_idx=0; col_idx<m_width; ++col_idx)
+            {
+                uint8_t ch_val = raw_line_data[col_idx].ch.alpha / divisor;
+                img_bin_data[col_idx / 4] |= ((ch_val << 6) >> ((col_idx % 4) * 2));
+            }
+        }
+    }
+    return result;
+}
+
+bool image_raw_data::create_4bit_alpha_binary(image_binary& bin) const
+{
+    bool result = false;
+    uint8_t divisor = 0xFF / (0x01 << 4) + 1;
+    /* Release existed data. */
+    bin.release();
+    /* Allocate new memory, force append alpha channel. */
+    if(bin.create(m_width, m_height, img_bin_format_alpha_4bit, true))
+    {
+        const img_raw_px_data* raw_data = reinterpret_cast<const img_raw_px_data*>(m_data);
+        for(int row_idx=0; row_idx<m_height; ++row_idx)
+        {
+            /* Src line head. */
+            const img_raw_px_data* raw_line_data = raw_data + (m_width * row_idx);
+            /* Dest line head. */
+            uint8_t* img_bin_data = bin.data() + (bin.line_width() * row_idx);
+            for(int col_idx=0; col_idx<m_width; ++col_idx)
+            {
+                uint8_t ch_val = raw_line_data[col_idx].ch.alpha / divisor;
+                img_bin_data[col_idx / 2] |= ((ch_val << 4) >> ((col_idx % 2) * 4));
+            }
+        }
+    }
+    return result;
+}
+
+bool image_raw_data::create_8bit_alpha_binary(image_binary& bin) const
+{
+    bool result = false;
+    int pixel_count = m_width * m_height;
+    int pixel_idx = 0;
+    /* Release existed data. */
+    bin.release();
+    /* Allocate new memory, force append alpha channel. */
+    if(bin.create(m_width, m_height, img_bin_format_alpha_8bit, true))
+    {
+        const img_raw_px_data* raw_data = reinterpret_cast<const img_raw_px_data*>(m_data);
+        uint8_t* img_bin_data = bin.data();
+        /* Fill data. */
+        while(pixel_idx < pixel_count)
+        {
+            img_bin_data[pixel_idx] = raw_data[pixel_idx].ch.alpha;
+            ++pixel_idx;
+        }
+    }
+    return result;
+}

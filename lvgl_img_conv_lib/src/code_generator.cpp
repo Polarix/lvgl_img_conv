@@ -72,6 +72,66 @@ void code_generator::output_img_bmp_line(const void* data, size_t len)
     }
 }
 
+void code_generator::output_img_data_size(void)
+{
+    switch(m_image_dsc_data.header.color_format)
+    {
+    case LV_IMG_CF_TRUE_COLOR:
+        case LV_IMG_CF_TRUE_COLOR_ALPHA:
+        case LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED:
+        {
+            m_source_file << "    .data_size = " << m_image_dsc_data.header.width * m_image_dsc_data.header.height << " * LV_IMG_PX_SIZE_ALPHA_BYTE,\n";
+            break;
+        }
+        case LV_IMG_CF_INDEXED_1BIT:
+        {
+            m_source_file << "    .data_size = " << ((m_image_dsc_data.header.width-1)/8+1) * m_image_dsc_data.header.height + (0x01 << 1) << ",\n";
+            break;
+        }
+        case LV_IMG_CF_INDEXED_2BIT:
+        {
+            m_source_file << "    .data_size = " << ((m_image_dsc_data.header.width-1)/4+1) * m_image_dsc_data.header.height + (0x01 << 2) << ",\n";
+            break;
+        }
+        case LV_IMG_CF_INDEXED_4BIT:
+        {
+            m_source_file << "    .data_size = " << ((m_image_dsc_data.header.width-1)/2+1) * m_image_dsc_data.header.height + (0x01 << 4) << ",\n";
+            break;
+        }
+        case LV_IMG_CF_INDEXED_8BIT:
+        {
+            m_source_file << "    .data_size = " << m_image_dsc_data.header.width * m_image_dsc_data.header.height + (0x01 << 8) << ",\n";
+            break;
+        }
+        case LV_IMG_CF_ALPHA_1BIT:
+        {
+            m_source_file << "    .data_size = " << ((m_image_dsc_data.header.width-1)/8+1) * m_image_dsc_data.header.height << ",\n";
+            break;
+        }
+        case LV_IMG_CF_ALPHA_2BIT:
+        {
+            m_source_file << "    .data_size = " << ((m_image_dsc_data.header.width-1)/4+1) * m_image_dsc_data.header.height << ",\n";
+            break;
+        }
+        case LV_IMG_CF_ALPHA_4BIT:
+        {
+            m_source_file << "    .data_size = " << ((m_image_dsc_data.header.width-1)/2+1) * m_image_dsc_data.header.height << ",\n";
+            break;
+        }
+        case LV_IMG_CF_ALPHA_8BIT:
+        {
+            m_source_file << "    .data_size = " << m_image_dsc_data.header.width * m_image_dsc_data.header.height << ",\n";
+            break;
+        }
+        default:
+        {
+            m_source_file << "    .data_size = 0,\n";
+            break;
+
+        }
+    }
+}
+
 void code_generator::output_img_dsc_data(void)
 {
     if(m_source_file.is_open())
@@ -83,7 +143,8 @@ void code_generator::output_img_dsc_data(void)
         m_source_file << "    .header.reserved = 0,\n";
         m_source_file << "    .header.w = " << m_image_dsc_data.header.width << ",\n";
         m_source_file << "    .header.h = " << m_image_dsc_data.header.height << ",\n";
-        m_source_file << "    .data_size = " << m_image_dsc_data.header.width * m_image_dsc_data.header.height << " * LV_IMG_PX_SIZE_ALPHA_BYTE,\n";
+//      m_source_file << "    .data_size = " << m_image_dsc_data.header.width * m_image_dsc_data.header.height << " * LV_IMG_PX_SIZE_ALPHA_BYTE,\n";
+        output_img_data_size();
         m_source_file << "    .data = image_px_map,\n";
         m_source_file << "};\n";
         m_source_file << "\n";

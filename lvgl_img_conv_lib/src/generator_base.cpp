@@ -17,6 +17,10 @@ static constexpr image_cf s_image_cf_array[] =                      {{LV_IMG_CF_
                                                                      {LV_IMG_CF_INDEXED_2BIT, "LV_IMG_CF_INDEXED_2BIT"},
                                                                      {LV_IMG_CF_INDEXED_4BIT, "LV_IMG_CF_INDEXED_4BIT"},
                                                                      {LV_IMG_CF_INDEXED_8BIT, "LV_IMG_CF_INDEXED_8BIT"},
+                                                                     {LV_IMG_CF_ALPHA_1BIT, "LV_IMG_CF_ALPHA_1BIT"},
+                                                                     {LV_IMG_CF_ALPHA_2BIT, "LV_IMG_CF_ALPHA_2BIT"},
+                                                                     {LV_IMG_CF_ALPHA_4BIT, "LV_IMG_CF_ALPHA_4BIT"},
+                                                                     {LV_IMG_CF_ALPHA_8BIT, "LV_IMG_CF_ALPHA_8BIT"},
                                                                     };
 
 

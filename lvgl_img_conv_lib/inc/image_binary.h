@@ -20,6 +20,10 @@ typedef enum _e_color_format_
     img_bin_format_indexed_2bit,
     img_bin_format_indexed_4bit,
     img_bin_format_indexed_8bit,
+    img_bin_format_alpha_1bit,
+    img_bin_format_alpha_2bit,
+    img_bin_format_alpha_4bit,
+    img_bin_format_alpha_8bit,
 }color_format_t;
 
 //===========================================================//

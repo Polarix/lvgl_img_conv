@@ -17,6 +17,8 @@ class code_generator : public generator_base
 private:
     std::ofstream           m_source_file;
 
+    void                    output_img_data_size(void);
+
 protected:
     virtual void            output_img_header(void);
     virtual void            output_img_bmp_line(const void* data, size_t len);

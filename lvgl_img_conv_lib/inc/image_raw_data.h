@@ -80,6 +80,7 @@ private:
 
     void                copy(const image_raw_data& source);
     void                force_release(void);
+
 public:
     explicit            image_raw_data(void);
     explicit            image_raw_data(const std::string& image_file_path);
@@ -93,6 +94,10 @@ public:
     bool                create_8b_binary(image_binary& bin, bool with_alpha) const;
     bool                create_16b_binary(image_binary& bin, bool with_alpha, bool swap) const;
     bool                create_32b_binary(image_binary& bin, bool with_alpha) const;
+    bool                create_1bit_alpha_binary(image_binary& bin) const;
+    bool                create_2bit_alpha_binary(image_binary& bin) const;
+    bool                create_4bit_alpha_binary(image_binary& bin) const;
+    bool                create_8bit_alpha_binary(image_binary& bin) const;
 };
 
 #endif // _INCLUDE_CLASS_IMAGE_RAW_DATA_H_

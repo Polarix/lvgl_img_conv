@@ -99,6 +99,26 @@ bool image_binary::create(int width, int height, color_format_t color_format, bo
             additional = (0x01 << 8);
             break;
         }
+        case img_bin_format_alpha_1bit:
+        {
+            line_width = (width - 1) / 8 + 1;
+            break;
+        }
+        case img_bin_format_alpha_2bit:
+        {
+            line_width = (width - 1) / 4 + 1;
+            break;
+        }
+        case img_bin_format_alpha_4bit:
+        {
+            line_width = (width - 1) / 2 + 1;
+            break;
+        }
+        case img_bin_format_alpha_8bit:
+        {
+            line_width = width;
+            break;
+        }
         default:
         {
             line_width = 0;
